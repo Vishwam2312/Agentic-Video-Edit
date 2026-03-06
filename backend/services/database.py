@@ -10,6 +10,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Any, AsyncGenerator, Optional
 
+import certifi
 from loguru import logger
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 from pymongo import ReturnDocument
@@ -37,10 +38,14 @@ async def connect_db() -> None:
     """
     global _client
     logger.info("Connecting to MongoDB at {}", settings.mongo_uri)
+
+    # Use certifi's CA bundle so Atlas TLS works on all platforms (Windows/Linux/macOS)
     _client = AsyncIOMotorClient(
         settings.mongo_uri,
-        serverSelectionTimeoutMS=2_000,
+        serverSelectionTimeoutMS=15_000,
+        connectTimeoutMS=20_000,
         uuidRepresentation="standard",
+        tlsCAFile=certifi.where(),
     )
     try:
         await _client.admin.command("ping")

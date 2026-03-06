@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --font-inter: 'Inter', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #101022;
+  color: #f1f5f9;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(17, 17, 212, 0.35);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(17, 17, 212, 0.6);
+}
+
+/* ── Glass Panel ── */
+.glass {
+  background: rgba(17, 17, 212, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.glass-strong {
+  background: rgba(16, 16, 34, 0.8);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ── Glow Effects ── */
+.glow-primary {
+  box-shadow: 0 0 20px rgba(17, 17, 212, 0.4), 0 0 60px rgba(17, 17, 212, 0.1);
+}
+
+.glow-sm {
+  box-shadow: 0 0 10px rgba(17, 17, 212, 0.3);
+}
+
+/* ── Gradient Text ── */
+.gradient-text {
+  background: linear-gradient(135deg, #4444ff 0%, #1111d4 40%, #7044ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-white {
+  background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Shimmer Skeleton ── */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.03) 25%,
+    rgba(255,255,255,0.09) 50%,
+    rgba(255,255,255,0.03) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s infinite;
+}
+
+/* ── Noise Texture Overlay ── */
+.noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* ── Active Nav Item ── */
+.nav-active {
+  background: rgba(17, 17, 212, 0.15);
+  color: #4444ff;
+  border: 1px solid rgba(17, 17, 212, 0.2);
+}
+
+/* ── Card Hover Border ── */
+.card-hover {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+.card-hover:hover {
+  border-color: rgba(17, 17, 212, 0.4);
+  box-shadow: 0 8px 32px rgba(17, 17, 212, 0.15);
+  transform: translateY(-2px);
+}
+
+/* ── Timeline Track ── */
+.timeline-track {
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255,255,255,0.03) 0px,
+    rgba(255,255,255,0.03) 1px,
+    transparent 1px,
+    transparent 40px
+  );
+}
+
+/* ── Editor Prose ── */
+.editor-prose h1 { font-size: 1.75rem; font-weight: 800; margin-bottom: 0.5rem; }
+.editor-prose h2 { font-size: 1.2rem; font-weight: 700; margin: 1.5rem 0 0.5rem; color: #a5b4fc; }
+.editor-prose p  { margin-bottom: 1rem; line-height: 1.75; color: #cbd5e1; }
+.editor-prose blockquote {
+  border-left: 3px solid #1111d4;
+  padding: 0.75rem 1.25rem;
+  background: rgba(17,17,212,0.06);
+  border-radius: 0 8px 8px 0;
+  margin: 1rem 0;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-white font-bold rounded-xl px-6 py-3 
+           hover:bg-primary-600 transition-all duration-200 
+           shadow-lg shadow-primary/25 hover:shadow-primary/40
+           hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .btn-ghost {
+    @apply border border-white/10 text-slate-300 font-semibold rounded-xl px-6 py-3
+           hover:bg-white/5 hover:border-white/20 transition-all duration-200;
+  }
+
+  .card {
+    @apply bg-surface-dark border border-white/[0.06] rounded-2xl
+           transition-all duration-300;
+  }
+
+  .input-base {
+    @apply bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 
+           text-sm text-slate-200 placeholder-slate-500
+           focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30
+           transition-all duration-200;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full 
+           text-xs font-semibold;
+  }
+}

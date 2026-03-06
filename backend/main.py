@@ -1,6 +1,14 @@
 import sys
+import asyncio
 import logging
 from contextlib import asynccontextmanager
+
+# ── Windows asyncio fix ───────────────────────────────────────────────────────
+# Python 3.12 on Windows defaults to ProactorEventLoop which breaks Motor's
+# async SSL handshake with MongoDB Atlas.  SelectorEventLoop works correctly.
+if sys.platform == "win32":
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+# ─────────────────────────────────────────────────────────────────────────────
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
