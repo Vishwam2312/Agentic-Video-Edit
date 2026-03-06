@@ -1,2 +1,4 @@
 # Services package
-# Add business logic and integrations here (e.g., storage, video_renderer, tts)
+from backend.services.database import db_dependency, connect_db, disconnect_db, Collections
+
+__all__ = ["db_dependency", "connect_db", "disconnect_db", "Collections"]

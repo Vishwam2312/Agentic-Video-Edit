@@ -15,11 +15,18 @@ python-multipart==0.0.9       # multipart/form-data uploads
 # ── PDF / document parsing ────────────────────────────────────────────────────
 pymupdf==1.24.9               # PDF text extraction (fitz)
 
+# ── Database ─────────────────────────────────────────────────────────────────
+motor==3.5.1                  # async MongoDB driver (wraps PyMongo)
+pymongo==4.8.0                # sync driver (used by motor internally)
+
 # ── Environment variables ─────────────────────────────────────────────────────
 python-dotenv==1.0.1
 
 # ── Logging ───────────────────────────────────────────────────────────────────
 loguru==0.7.2
+
+# ── LLM / AI ─────────────────────────────────────────────────────────────────
+openai>=1.40.0                # OpenAI SDK — also works with any compatible endpoint
 
 # ── Dev / testing ─────────────────────────────────────────────────────────────
 pytest==8.3.2
